@@ -59,6 +59,9 @@ $endif$
 $if(hide-emails)$
   hide-emails: true,
 $endif$
+$if(table-stripes)$
+  table-stripes: true,
+$endif$
 $if(notice)$
   notice: [$notice$],
 $endif$

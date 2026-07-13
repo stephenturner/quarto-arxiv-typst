@@ -30,7 +30,7 @@ Either command installs the extension into your project's `_extensions/` directo
 - Numeric bracketed citations via the bundled `natbib.csl`, with "References" set at 9 pt and placeable anywhere with a `::: {#refs}` div (e.g. before the appendix)
 - Quarto cross-references for sections, figures, tables, and equations, including into the appendix, numbered A, A.1, ...
 - Executed R and Python code chunks through knitr, with figures, `knitr::kable()` and gt tables styled to match the paper
-- Booktabs-style tables for plain markdown pipe tables, plus `toprule`/`midrule`/`botrule` helpers for raw Typst tables
+- Booktabs-style tables with bold header rows for plain markdown pipe tables, optional zebra striping (`table-stripes: true`), plus `toprule`/`midrule`/`botrule` helpers for raw Typst tables
 
 ## Usage
 
@@ -89,6 +89,7 @@ Set these at the top level of the document metadata.
 | `anonymous: true` | off | Submission mode: authors replaced with "Anonymous Author(s)", line numbers on. |
 | `lineno: true`    | off | Force line numbers on in any mode. |
 | `hide-emails: true` | off | Omit the email line under the author block. The correspondence footnote still shows the corresponding author's name and email; omit `email:` from an author's entry to keep their address off the page entirely. |
+| `table-stripes: true` | off | Shade alternating table body rows light gray, leaving the header row unshaded. Applies to pipe tables, `knitr::kable()`, gt, and raw Typst tables alike; cells that set their own background (such as gt's stub column) keep it. |
 | `mainfont: "..."` | TeX Gyre Termes | Override the body font family. |
 
 Standard [Quarto Typst options](https://quarto.org/docs/reference/formats/typst.html) also pass through: `papersize` (default `us-letter`), `margin` (default `x: 1in, y: 1in`), `section-numbering` (default `"1.1"`), and `toc` / `toc-title` / `toc-depth` (toc off by default), plus execution and figure options (`echo`, `fig-width`, ...) and `keep-typ` for debugging. Set them under the format key:

@@ -39,6 +39,7 @@ bibliography: references.bib
 notice: "Preprint. Under review since 1987."
 hide-emails: false
 lineno: false
+table-stripes: true
 format:
   arxiv-typst:
     echo: true
@@ -78,7 +79,7 @@ All artwork must be neat, clean, and legible. @fig-loss shows a placeholder trai
 
 ## Static tables {#sec-tables}
 
-Tables should have a caption above them, as in @tbl-results, which is a plain markdown pipe table labeled by putting `{#tbl-results}` on its caption line and referenced with `@tbl-results`. Avoid vertical rules.
+Tables should have a caption above them, as in @tbl-results, which is a plain markdown pipe table labeled by putting `{#tbl-results}` on its caption line and referenced with `@tbl-results`. Header rows render bold automatically, and setting `table-stripes: true` in the document metadata shades alternating body rows. Avoid vertical rules.
 
 | Model       | Params (M) | Accuracy (%) |
 |:------------|-----------:|-------------:|

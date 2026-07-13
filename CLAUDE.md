@@ -27,11 +27,7 @@ quarto render template.qmd --to arxiv-typst -M anonymous:true --output submissio
 
 A render with `--output somefile.pdf` deletes the previously rendered `template.pdf`; re-run the plain render afterwards to restore it. Verify changes visually by rasterizing pages (`pdftoppm -png -r 150 template.pdf page`) and reading the images, not just by checking that the render exits cleanly.
 
-To debug template changes, keep the generated Typst and read it:
-
-```bash
-quarto render template.qmd --to arxiv-typst -M keep-typ:true   # writes template.typ
-```
+To debug template changes, keep the generated Typst and read it. Set `keep-typ: true` in template.qmd's format block, render, read `template.typ`, then flip it back. The command-line form `-M keep-typ:true` stopped working (the metadata is picked up but Quarto deletes the .typ after compiling; observed 2026-07-13), so only the YAML route is reliable.
 
 Renders are expected to be completely warning-free. The body font (TeX Gyre Termes) is bundled in `_extensions/arxiv/fonts/` and wired up via `font-paths` in `_extension.yml`, so "unknown font family" warnings never come from the template. If font or `invalid font weight` warnings appear, the source is document code, typically gt emitting its web font stack or its default stub weight `initial`; fix those in the chunk with `gt::tab_options(table.font.names = ..., stub.font.weight = "normal")`, not in the template.
 
@@ -54,6 +50,12 @@ There is no accepted/camera-ready logic; it was removed deliberately, so do not 
 `anonymous: true` swaps the whole author tuple for "Anonymous Author(s)" before anything author-derived is rendered, which is why ORCID badges, author-note footnotes, and emails all vanish in that mode without any extra guards. It also turns line numbers on; `lineno` overrides that default in either direction.
 
 `hide-emails: true` removes only the email row under the affiliations. The correspondence footnote always renders "Name \<email\>" for corresponding authors, on the theory that institutional usernames (sdt5z@virginia.edu) identify nobody without the name attached; the supported way to keep an address off the page entirely is omitting `email:` from that author's YAML entry.
+
+### Table styling
+
+All tables get booktabs rules from one `set table(stroke: ...)` in `typst-template.typ`: a heavy rule above the header, a light rule under it, and a heavy rule under the last row. A Typst stroke callback cannot see the row count, so the "last row" rule works by giving every cell a heavy bottom stroke and letting each row's explicit top stroke cancel it on interior edges (the lower cell wins on a shared edge); the heavy bottom survives only where no cell sits below. Do not simplify the bottom stroke away, and keep the top stroke explicit for every y, or interior rules reappear.
+
+`show table.cell.where(y: 0): strong` bolds header rows everywhere (Quarto's Typst writer emits pipe-table headers unbolded, unlike HTML/LaTeX). `table-stripes: true` (a metadata option plumbed through `typst-show.typ`, default off) shades alternating body rows via a conditional set rule, leaving the header unshaded. Cells that set their own strokes or fills win over all of this, which is expected and how gt keeps its light gray interior lines and white stub column.
 
 ### Quarto-specific workarounds in the template
 

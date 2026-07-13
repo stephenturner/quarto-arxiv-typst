@@ -361,6 +361,8 @@
  *   line numbers (submission mode).
  *   notice: Text of the first-page footer notice.
  *   lineno: Overrides the line-numbering default (on when anonymous).
+ *   table-stripes: Shades alternating table body rows light gray; the
+ *   header row stays unshaded.
  *   paper, margin, sectionnumbering, toc, toc-title, toc-depth: Standard
  *   Quarto typst options (papersize, margin, section-numbering, toc,
  *   toc-title, toc-depth), passed through from document metadata.
@@ -376,6 +378,7 @@
   notice: [Preprint. Under review.],
   lineno: none,
   hide-emails: false,
+  table-stripes: false,
   paper: "us-letter",
   margin: (x: 1in, y: 1in),
   sectionnumbering: "1.1",
@@ -483,13 +486,20 @@
   show figure.where(kind: "quarto-float-fig"): it => make_figure(fc, it)
   show figure.where(kind: "quarto-float-tbl"): it => make_figure(fc, it, caption_above: true)
 
-  // Booktabs-style tables: no vertical rules or cell borders. A rule above
-  // the header and below the last row, plus Quarto's own rule under the
-  // header row, give the classic preprint look for pipe tables.
+  // Booktabs-style tables: no vertical rules or cell borders, a heavy rule
+  // above the header and below the last row, and a light rule under the
+  // header. Every cell claims a heavy bottom stroke, but on interior edges
+  // the cell below wins with its explicit top stroke, so the heavy rule
+  // survives only on the table's bottom edge, where no cell overrides it.
   set table(
-    stroke: (x, y) => (top: if y == 0 { 0.08em + black } else { 0pt }),
+    stroke: (x, y) => (
+      top: if y == 0 { 0.08em + black } else if y == 1 { 0.05em + black } else { 0pt },
+      bottom: 0.08em + black,
+    ),
     inset: (x: 8pt, y: 4pt),
   )
+  show table.cell.where(y: 0): strong
+  set table(fill: (_, y) => if y > 0 and calc.even(y) { luma(245) }) if table-stripes
 
   // Math equation numbering and referencing.
   set math.equation(numbering: "(1)")
