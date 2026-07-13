@@ -1,10 +1,10 @@
-# arXiv Quarto + Typst format
+# A Quarto Template for arXiv Preprints
 
-A Quarto extension that renders documents to PDF in the classic arXiv preprint style: the single-column ML-paper look originated by the NeurIPS style files and shared by related conferences (ICML, ICLR, and others). It uses Quarto's Typst engine (no LaTeX installation required) and adapts the NeurIPS Typst template from [daskol/typst-templates](https://github.com/daskol/typst-templates) (MIT).
+A Quarto extension that renders documents to PDF in the classic arXiv preprint style: the single-column ML-paper look originated by the NeurIPS style files and shared by related conferences (ICML, ICLR, and others). It uses Quarto's Typst engine (no LaTeX installation required) and adapts the NeurIPS Typst template from [daskol/typst-templates](https://github.com/daskol/typst-templates) (MIT). 
 
-Rendering is fast: a full paper compiles in about a second.
+Example rendered PDF: [template.pdf](./template.pdf).
 
-![The four pages of the bundled template, rendered to PDF.](images/preview.png)
+![Example of the bundled template, rendered to PDF.](images/preview.png)
 
 ## Installation
 
