@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="300" viewBox="0 0 480 300">
+  <rect width="480" height="300" fill="white"/>
+  <!-- axes -->
+  <line x1="50" y1="260" x2="450" y2="260" stroke="black" stroke-width="1.5"/>
+  <line x1="50" y1="260" x2="50" y2="20" stroke="black" stroke-width="1.5"/>
+  <!-- ticks and labels -->
+  <g font-family="Times New Roman, serif" font-size="14" fill="black">
+    <text x="45" y="278" text-anchor="middle">0</text>
+    <text x="150" y="278" text-anchor="middle">25</text>
+    <text x="250" y="278" text-anchor="middle">50</text>
+    <text x="350" y="278" text-anchor="middle">75</text>
+    <text x="450" y="278" text-anchor="middle">100</text>
+    <text x="250" y="296" text-anchor="middle">Epoch</text>
+    <text x="40" y="264" text-anchor="end">0</text>
+    <text x="40" y="184" text-anchor="end">1</text>
+    <text x="40" y="104" text-anchor="end">2</text>
+    <text x="40" y="26" text-anchor="end">3</text>
+    <text x="16" y="140" text-anchor="middle" transform="rotate(-90 16 140)">Loss</text>
+  </g>
+  <!-- gridlines -->
+  <g stroke="#cccccc" stroke-width="0.75">
+    <line x1="50" y1="180" x2="450" y2="180"/>
+    <line x1="50" y1="100" x2="450" y2="100"/>
+    <line x1="150" y1="260" x2="150" y2="20"/>
+    <line x1="250" y1="260" x2="250" y2="20"/>
+    <line x1="350" y1="260" x2="350" y2="20"/>
+  </g>
+  <!-- training curve -->
+  <path d="M 50 40 C 100 200, 150 225, 250 240 S 400 252, 450 253"
+        fill="none" stroke="#1f4e9c" stroke-width="2.5"/>
+  <!-- validation curve -->
+  <path d="M 50 45 C 100 190, 160 210, 250 222 S 400 230, 450 232"
+        fill="none" stroke="#b03030" stroke-width="2.5" stroke-dasharray="6 4"/>
+  <!-- legend -->
+  <g font-family="Times New Roman, serif" font-size="14" fill="black">
+    <line x1="300" y1="60" x2="330" y2="60" stroke="#1f4e9c" stroke-width="2.5"/>
+    <text x="336" y="65">Training</text>
+    <line x1="300" y1="82" x2="330" y2="82" stroke="#b03030" stroke-width="2.5" stroke-dasharray="6 4"/>
+    <text x="336" y="87">Validation</text>
+  </g>
+</svg>

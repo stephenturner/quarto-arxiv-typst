@@ -1,0 +1,5 @@
+.quarto
+.DS_Store
+/natbib.csl
+/*.typ
+/submission.pdf
