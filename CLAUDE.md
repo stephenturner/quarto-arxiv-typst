@@ -45,7 +45,7 @@ Understanding a bug usually means knowing which of these three layers produced t
 
 ### Mode and notice handling
 
-There is no accepted/camera-ready logic; it was removed deliberately, so do not reintroduce it. `notice` is a plain parameter, default `[Preprint. Under review.]`, rendered centered in the first-page footer (later pages get the page number instead). Users set `notice` in the metadata to whatever their venue wants.
+There is no accepted/camera-ready logic; it was removed deliberately, so do not reintroduce it. `notice` is a plain parameter, default `none`, rendered centered in the first-page footer (later pages get the page number instead). Users set `notice` in the metadata to whatever their venue wants; with no `notice` in the metadata the first page gets no footer at all, so keep the `notice != none` guard in the page footer callback.
 
 `anonymous: true` swaps the whole author tuple for "Anonymous Author(s)" before anything author-derived is rendered, which is why ORCID badges, author-note footnotes, and emails all vanish in that mode without any extra guards. It also turns line numbers on; `lineno` overrides that default in either direction.
 

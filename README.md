@@ -89,7 +89,7 @@ Set these at the top level of the document metadata.
 |-------------|---------|--------|
 | `subtitle: "..."` | none | Italic second line under the title, inside the rules. |
 | `date: today` | none | Date line centered under the authors. Takes `today`, a literal date (`2026-07-14`), or any string; `date-format` controls how it prints. Omit it and no date renders. |
-| `notice: "..."`   | "Preprint. Under review." | Text of the first-page footer notice. |
+| `notice: "..."`   | none | Text of the first-page footer notice. Omit it and the first page gets no footer at all. |
 | `anonymous: true` | off | Submission mode: authors replaced with "Anonymous Author(s)", line numbers on. |
 | `lineno: true`    | off | Force line numbers on in any mode. |
 | `hide-emails: true` | off | Omit the email line under the author block. The correspondence footnote still shows the corresponding author's name and email; omit `email:` from an author's entry to keep their address off the page entirely. |
@@ -178,6 +178,17 @@ knitr::kable(
 ]
 ```
 ````
+
+If you'd rather not repeat the block at each table, you can delete both wrappers and put a block like this at the top of the Qmd:
+
+
+````
+```{=typst}
+#set table(fill: (_, y) => if y == 0 { none } else if calc.even(y) { luma(245) })
+```
+````
+
+It would then apply to every table in the document, and captions would stay at normal size since they live outside the table element.
 
 ## Testing
 

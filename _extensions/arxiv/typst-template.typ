@@ -363,7 +363,8 @@
  *   date: Optional date line, centered under the authors.
  *   anonymous: Replaces authors with "Anonymous Author(s)" and turns on
  *   line numbers (submission mode).
- *   notice: Text of the first-page footer notice.
+ *   notice: Text of the first-page footer notice. None leaves the first-page
+ *   footer empty.
  *   lineno: Overrides the line-numbering default (on when anonymous).
  *   table-stripes: Shades alternating table body rows light gray; the
  *   header row stays unshaded.
@@ -380,7 +381,7 @@
   date: none,
   abstract: none,
   anonymous: false,
-  notice: [Preprint. Under review.],
+  notice: none,
   lineno: none,
   hide-emails: false,
   table-stripes: false,
@@ -417,7 +418,10 @@
     footer: context {
       let i = counter(page).at(here()).first()
       if i == 1 {
-        return align(center, text(size: fc.size.notice, [#notice]))
+        // No notice means no first-page footer at all.
+        if notice != none {
+          return align(center, text(size: fc.size.notice, [#notice]))
+        }
       } else {
         return align(center, text(size: fc.size.normal, [#i]))
       }
