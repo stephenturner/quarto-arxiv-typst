@@ -1,6 +1,6 @@
 ---
 title: "A Quarto Template for arXiv Preprints with Typst"
-subtitle: "Render quickly with that typical NeurIPS/ICML/ICLR look and feel"
+subtitle: "Render to PDF quickly with that typical NeurIPS/ICML/ICLR look and feel"
 date: today
 date-format: long
 author:
@@ -8,40 +8,48 @@ author:
     email: ada@example.org
     equal-contributor: true
     affiliations:
-      - id: analytical
-        name: Analytical Engine Institute
-        department: Department of Computation
-        city: London
-        country: United Kingdom
+      - ref: analytical
+      - ref: misk
   - name: Kurt Gödel
     email: kurt@example.org
     equal-contributor: true
     affiliations:
-      - id: ias
-        name: Institute for Advanced Study
-        city: Princeton
-        country: United States
+      - ref: ias
   - name: Emmy Noether
     email: emmy@example.org
     affiliations:
-      - id: ias
-      - id: uva
+      - ref: ias
   - name: Stephen D. Turner
     email: stephen@example.org
     orcid: 0000-0001-9140-9028
     corresponding: true
     affiliations:
-    - id: ias
-    - id: analytical
-    - id: uva
-      name: University of Virginia
-      department: School of Data Science
-      city: Charlottesville
-      country: United States
+      - ref: uva
+      - ref: misk
+affiliations:
+  - id: analytical
+    name: Analytical Engine Institute
+    department: Department of Computation
+    city: London
+    country: United Kingdom
+  - id: ias
+    name: Institute for Advanced Study
+    city: Princeton
+    country: United States
+  - id: uva
+    name: University of Virginia
+    department: School of Data Science
+    city: Charlottesville
+    country: United States
+  - id: misk
+    name: Miskatonic University
+    department: Department of Quarto Engineering
+    city: Arkham, Massachusetts
+    country: United States
 abstract: "The abstract paragraph should be indented ½ inch on both the left- and right-hand margins. Use 10 point type, with a vertical spacing (leading) of 11 points. The word Abstract must be centered, bold, and in point size 12. Two line spaces precede the abstract. The abstract must be limited to one paragraph. This document demonstrates the `arxiv-typst` Quarto format: sections, math, figures, tables, executed R and Python code, cross-references, citations, footnotes, and an appendix."
 keywords: [machine learning, typesetting, reproducibility]
 bibliography: references.bib
-notice: "Preprint. Under review since 1987."
+notice: "Preprint. Submitted to the first annual NeurIPS Conference. Under review since 1987."
 hide-emails: false
 lineno: false
 table-stripes: true
@@ -106,7 +114,7 @@ This section holds executed code. Everything here is computed at render time by 
 #| label: fig-cars
 #| fig-cap: "Stopping distance against speed for the built-in cars data, with a least-squares fit."
 #| fig-width: 5
-#| fig-height: 2.5
+#| fig-height: 2
 #| out-width: "70%"
 #| echo: false
 par(mar = c(4, 4, 1, 1))
@@ -151,7 +159,7 @@ knitr::kable(out)
 ```{r}
 #| label: tbl-gt
 #| tbl-cap: "First rows of mtcars, via the gt package."
-gt::gt(head(mtcars[, 1:5]), rownames_to_stub = TRUE) |>
+gt::gt(mtcars[1:8, 1:5], rownames_to_stub = TRUE) |>
   gt::tab_options(
     table.font.names = "TeX Gyre Termes",
     stub.font.weight = "normal"
