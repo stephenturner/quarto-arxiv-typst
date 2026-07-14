@@ -1,12 +1,14 @@
 # A Quarto Template for arXiv Preprints
 
-A Quarto extension that renders documents to PDF in the classic arXiv preprint style: the single-column ML-paper look originated by the NeurIPS style files and shared by related conferences (ICML, ICLR, and others). It uses Quarto's Typst engine (no LaTeX installation required) and adapts the NeurIPS Typst template from [daskol/typst-templates](https://github.com/daskol/typst-templates) (MIT). 
+A Quarto extension that renders documents to PDF in the classic arXiv preprint style: the single-column ML-paper look originated by the NeurIPS style files and shared by related conferences (ICML, ICLR, and others). It uses Quarto's Typst engine (no LaTeX installation required) and adapts the NeurIPS Typst template from [daskol/typst-templates](https://github.com/daskol/typst-templates) (MIT).
 
 Example rendered PDF: [template.pdf](./template.pdf).
 
 ![Example of the bundled template, rendered to PDF.](images/preview.png)
 
 ## Installation
+
+Requires Quarto 1.7 or later (the template uses Typst 0.13 features, and Quarto bundles Typst 0.13 starting with 1.7).
 
 To start a new paper from the bundled template:
 
@@ -45,11 +47,13 @@ author:
   - name: Ada Lovelace
     email: ada@example.org
     affiliations:
-      - id: aei
-        name: Analytical Engine Institute
-        department: Department of Computation
-        city: London
-        country: United Kingdom
+      - ref: aei
+affiliations:
+  - id: aei
+    name: Analytical Engine Institute
+    department: Department of Computation
+    city: London
+    country: United Kingdom
 abstract: |
   One paragraph, at most.
 keywords: [machine learning]
@@ -63,7 +67,7 @@ format:
 quarto render paper.qmd --to arxiv-typst
 ```
 
-Authors sharing an affiliation should reference it by id; give the full affiliation once and use `- id: aei` alone in later authors.
+Define affiliations once in a document-level `affiliations:` list and point at them with `- ref: aei` in each author's entry, as above; authors sharing an affiliation just repeat the same `ref:`. Don't reference a shared affiliation with `- id: aei` alone: Quarto collapses id-only references when authors hold more than one shared affiliation, which scrambles the superscript numbering.
 
 Three more author fields are supported. `orcid: 0000-0001-9140-9028` puts a linked ORCID iD badge after the author's name. `equal-contributor: true` marks each flagged author with a superscript asterisk; `corresponding: true` marks the author with a superscript dagger. Both add matching symbol footnotes at the bottom of the first page, above the notice line, like LaTeX's `\thanks`: "*These authors contributed equally." and "†Correspondence to Jane Doe \<jd4x@virginia.edu\>." The correspondence note always pairs the name with the address, since institutional usernames often identify nobody on their own, and it stays visible under `hide-emails: true`. Regular document footnotes still number from 1. The footnotes only appear when at least one author carries a flag, and all of it disappears in anonymous mode along with everything else identifying:
 
@@ -72,13 +76,13 @@ Three more author fields are supported. `orcid: 0000-0001-9140-9028` puts a link
     email: ada@example.org
     equal-contributor: true
     affiliations:
-      - id: aei
+      - ref: aei
   - name: Stephen D. Turner
     email: stephen@example.org
     orcid: 0000-0001-9140-9028
     corresponding: true
     affiliations:
-      - id: uva
+      - ref: uva
 ```
 
 ## Format options
@@ -181,7 +185,6 @@ knitr::kable(
 
 If you'd rather not repeat the block at each table, you can delete both wrappers and put a block like this at the top of the Qmd:
 
-
 ````
 ```{=typst}
 #set table(fill: (_, y) => if y == 0 { none } else if calc.even(y) { luma(245) })
@@ -206,7 +209,7 @@ Publishing the extension is just pushing this repository to GitHub; there is no 
 - `_extensions/arxiv/` is the extension itself: `_extension.yml`, the three template partials, `natbib.csl`, and the bundled fonts. The format id `arxiv-typst` comes from this directory's name plus the base format, so the repository can be named anything (here, `quarto-arxiv-typst`); renaming the directory renames the format.
 - `template.qmd`, `references.bib`, and `loss-curve.svg` at the root are the starter files that `quarto use template` copies into a new paper. `quarto add` installs only `_extensions/`.
 
-To release a new version, bump `version` in `_extensions/arxiv/_extension.yml` and push. Users pick up changes with `quarto update stephenturner/quarto-arxiv-typst` (and can remove with `quarto remove`). For reproducible installs, tag releases and reference them explicitly, e.g. `quarto add stephenturner/quarto-arxiv-typst@v0.1.0`.
+To release a new version, bump `version` in `_extensions/arxiv/_extension.yml` and push. Users pick up changes with `quarto update stephenturner/quarto-arxiv-typst` (and can remove with `quarto remove`). For reproducible installs, tag releases and reference the tag in the `quarto add` command.
 
 ## Scope
 
