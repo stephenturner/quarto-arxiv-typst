@@ -1,6 +1,6 @@
 ---
-title: "A Quarto Template for arXiv Preprints"
-subtitle: "Rendering to Typst without LaTeX"
+title: "A Quarto Template for arXiv Preprints with Typst"
+subtitle: "Render quickly with that typical NeurIPS/ICML/ICLR look and feel"
 date: today
 date-format: long
 author:
@@ -25,12 +25,14 @@ author:
     email: emmy@example.org
     affiliations:
       - id: ias
+      - id: uva
   - name: Stephen D. Turner
     email: stephen@example.org
     orcid: 0000-0001-9140-9028
     corresponding: true
     affiliations:
     - id: ias
+    - id: analytical
     - id: uva
       name: University of Virginia
       department: School of Data Science
