@@ -155,6 +155,30 @@ The template exports a few helpers usable in raw Typst blocks:
 - `#paragraph[...]`: run-in bold paragraph heading
 - `#url("...")`: link set in monospace
 
+## Tables
+
+Sometimes printing tables with `knitr::kable()` is ugly when you have wide tables, resulting in lots of hyphenation and hard returns. Add this before and after an R code chunk that generates a table if you want to shrink the table font size, and make other small adjustments to get the table to fit comfortably.
+
+````
+```{=typst}
+#[
+#show table: set text(size: 7.5pt, hyphenate: false)
+#show table: set par(justify: false, leading: 0.45em)
+```
+
+```{r}
+knitr::kable(
+  dat,
+  format = "pipe",
+  escape = FALSE
+)
+```
+
+```{=typst}
+]
+```
+````
+
 ## Testing
 
 `template.qmd` exercises sections, cross-references, math with numbered equations, static and computed figures and tables (base R graphics, `knitr::kable()`, gt), a Python chunk, footnotes, block quotes, citations, author notes, and an appendix. The format itself needs only Quarto; rendering the demo document additionally needs R with knitr and gt (the Python chunk runs with `python.reticulate: false`, so any system Python works). Render it normally and in anonymous submission mode:
