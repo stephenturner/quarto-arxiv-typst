@@ -1,5 +1,8 @@
 ---
 title: "A Quarto Template for arXiv Preprints"
+subtitle: "Rendering to Typst without LaTeX"
+date: today
+date-format: long
 author:
   - name: Ada Lovelace
     email: ada@example.org

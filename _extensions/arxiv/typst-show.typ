@@ -2,6 +2,12 @@
 $if(title)$
   title: [$title$],
 $endif$
+$if(subtitle)$
+  subtitle: [$subtitle$],
+$endif$
+$if(date)$
+  date: [$date$],
+$endif$
   authors: (
     (
 $for(by-author)$

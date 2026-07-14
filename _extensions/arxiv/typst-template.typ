@@ -37,6 +37,7 @@
     normal: font-defaults.normalsize,
     script: font-defaults.scriptsize,
     title: 17pt,
+    subtitle: 13pt,
     section: 12pt,
     abstract-title: 12pt,
     notice: 9pt,
@@ -357,6 +358,9 @@
  * arxiv
  *
  * Args:
+ *   subtitle: Optional second line, italic, under the title and inside the
+ *   rules.
+ *   date: Optional date line, centered under the authors.
  *   anonymous: Replaces authors with "Anonymous Author(s)" and turns on
  *   line numbers (submission mode).
  *   notice: Text of the first-page footer notice.
@@ -370,9 +374,10 @@
  */
 #let arxiv(
   title: [],
+  subtitle: none,
   authors: ((), (:)),
   keywords: (),
-  date: auto,
+  date: none,
   abstract: none,
   anonymous: false,
   notice: [Preprint. Under review.],
@@ -401,7 +406,8 @@
     title: title,
     author: format-author-names(authors),
     keywords: keywords,
-    date: date,
+    // Quarto hands `date` over as a string, which set document rejects.
+    date: if type(date) == datetime { date } else { auto },
   )
 
   set page(
@@ -532,6 +538,11 @@
     v(0.1in + top-rule-width / 2)
     line(length: 100%, stroke: top-rule-width + black)
     align(center, text(size: fc.size.title, weight: "bold", [#title]))
+    if subtitle != none {
+      v(-0.15in)
+      align(center, text(size: fc.size.subtitle, style: "italic", [#subtitle]))
+      v(0.05in)
+    }
     v(-bot-rule-width)
     line(length: 100%, stroke: bot-rule-width + black)
   })
@@ -592,6 +603,20 @@
     }
     v(0.3in - 0.1in)
   })
+
+  // Date, centered under the authors. Both branches pull up: the author
+  // block's trailing space is sized for the classic layout, and whatever
+  // follows it (the date, or the abstract when there is no date) should sit
+  // the same distance below the emails.
+  if date != none {
+    block(width: 100%, {
+      set text(size: fc.size.normal)
+      v(-0.15in)
+      align(center, [#date])
+    })
+  } else {
+    v(-0.25in)
+  }
 
   v(6.5pt)
 

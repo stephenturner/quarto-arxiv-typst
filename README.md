@@ -39,6 +39,8 @@ Set the format in your document header and render:
 ```yaml
 ---
 title: "My Paper"
+subtitle: "An optional second line"
+date: today
 author:
   - name: Ada Lovelace
     email: ada@example.org
@@ -85,6 +87,8 @@ Set these at the top level of the document metadata.
 
 | Option      | Default | Effect |
 |-------------|---------|--------|
+| `subtitle: "..."` | none | Italic second line under the title, inside the rules. |
+| `date: today` | none | Date line centered under the authors. Takes `today`, a literal date (`2026-07-14`), or any string; `date-format` controls how it prints. Omit it and no date renders. |
 | `notice: "..."`   | "Preprint. Under review." | Text of the first-page footer notice. |
 | `anonymous: true` | off | Submission mode: authors replaced with "Anonymous Author(s)", line numbers on. |
 | `lineno: true`    | off | Force line numbers on in any mode. |
