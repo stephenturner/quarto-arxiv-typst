@@ -344,6 +344,9 @@
 //   = First Appendix Section   // rendered as "A  First Appendix Section"
 // Add #pagebreak(weak: true) before the show rule to start the appendix
 // on a fresh page; the numbering switch itself does not force one.
+// A heading with numbering disabled ({.unnumbered} in Quarto) renders as an
+// unlettered banner and does not advance the letter counter, so the next
+// numbered heading still starts at A.
 #let appendix(body) = {
   set heading(numbering: "A.1")
   counter(heading).update(0)

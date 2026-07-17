@@ -148,8 +148,12 @@ Everything after a raw Typst block containing `#show: appendix` is numbered A, A
 #show: appendix
 ```
 
-# Supplementary Material
+# Supplementary Material {.unnumbered}
+
+# Additional Results
 ````
+
+Here the `{.unnumbered}` heading is an unlettered banner over the whole appendix (call it "Appendix", "Supplementary Material", whatever you like), and the lettering starts at the next numbered heading, so "Additional Results" renders as "A Additional Results" with its subsections numbered A.1, A.2. Drop the `{.unnumbered}` class if you want the first heading lettered instead. Quarto's `@sec-` cross-references only work on numbered headings; to reference the unnumbered banner, give it an id and link to it directly, e.g. `[supplementary material](#sec-supplement)`.
 
 ## Typst helpers
 

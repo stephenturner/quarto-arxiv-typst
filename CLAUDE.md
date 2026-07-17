@@ -57,6 +57,12 @@ All tables get booktabs rules from one `set table(stroke: ...)` in `typst-templa
 
 `show table.cell.where(y: 0): strong` bolds header rows everywhere (Quarto's Typst writer emits pipe-table headers unbolded, unlike HTML/LaTeX). `table-stripes: true` (a metadata option plumbed through `typst-show.typ`, default off) shades alternating body rows via a conditional set rule, leaving the header unshaded. Cells that set their own strokes or fills win over all of this, which is expected and how gt keeps its light gray interior lines and white stub column.
 
+### Appendix numbering and references
+
+`#show: appendix` (a helper in `typst-template.typ`) switches heading numbering to letters for the rest of the document. The supported pattern, exercised in `template.qmd`, is a banner heading marked `{.unnumbered}` right after the show rule ("Supplementary Material", "Appendix", whatever the user wants), then numbered headings lettered A, B with subsections A.1, A.2. An unnumbered heading does not advance Typst's heading counter, so the first lettered section after the banner still starts at A; drop the class to letter the banner itself.
+
+Quarto resolves `@sec-` cross-references only for numbered headings: a `@sec-` ref to the unnumbered banner renders as "?@sec-..." with an "Unable to resolve crossref" warning (verified 2026-07-17), and since renders must stay warning-free this counts as a break. The banner keeps an id and is referenced with a plain markdown link instead, `[Supplementary Material](#sec-supplement)`, which compiles to `#link(<sec-supplement>)[...]`. `@sec-` refs to lettered appendix sections resolve with the letter ("Section A"), so both styles can point into the appendix, and the introduction of `template.qmd` combines them ("in the [Supplementary Material](#sec-supplement) starting in @sec-results").
+
 ### Quarto-specific workarounds in the template
 
 These exist because Quarto's Typst output differs from hand-written Typst. Do not simplify them away.

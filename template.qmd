@@ -68,7 +68,7 @@ format:
 
 # Introduction {#sec-intro}
 
-Deep learning has seen wide adoption since the introduction of convolutional architectures [@krizhevsky2012imagenet] and attention mechanisms [@vaswani2017attention]. This document is not a real paper; it exists to exercise the formatting features of the `arxiv-typst` format so you can check that the output matches what you expect from an arXiv preprint. The method appears in @sec-method, computational results in @sec-experiments, and supplementary material in @sec-supplement.
+Deep learning has seen wide adoption since the introduction of convolutional architectures [@krizhevsky2012imagenet] and attention mechanisms [@vaswani2017attention]. This document is not a real paper; it exists to exercise the formatting features of the `arxiv-typst` format so you can check that the output matches what you expect from an arXiv preprint. The method appears in @sec-method, computational results in @sec-experiments, and additional details in the [Supplementary Material](#sec-supplement) starting in @sec-results.
 
 ## Citations
 
@@ -206,10 +206,14 @@ The empty `#refs` div below places the reference list here, before the appendix,
 ```
 :::
 
-# Supplementary Material {#sec-supplement}
+# Supplementary Material {#sec-supplement .unnumbered}
 
-Anything after the `#show: appendix` raw block is numbered as an appendix, and the explicit `#pagebreak(weak: true)` above it starts it on a new page (drop that line to let the appendix run on). Cross-references keep working: this is @sec-supplement, and @sec-intro still points back to the introduction.
+Anything after the `#show: appendix` raw block is numbered as an appendix, and the explicit `#pagebreak(weak: true)` above it starts it on a new page (drop that line to let the appendix run on). This heading carries `{.unnumbered}`, so it acts as an unlettered banner over the whole appendix and the lettering starts at the next numbered heading; drop the class if you want the banner itself lettered. Quarto's `@sec-` cross-references only work on numbered headings, so this banner is referenced from the introduction with a plain link, `[supplementary material](#sec-supplement)`.
 
-## Additional Results
+# Additional Results {#sec-results}
+
+Numbered appendix sections are lettered A, B, and so on. Cross-references keep working: this is @sec-results, and @sec-intro still points back to the introduction.
+
+## Additional Details
 
 Appendix subsections are numbered A.1, A.2, and so on.
